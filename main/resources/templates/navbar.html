@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="container">
+        <a class="navbar-brand" href="#">Words World!</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+
+                <!-- If user is not logged in -->
+                <li class="nav-item" th:if="${user == null}">
+                    <a class="nav-link active" aria-current="page" href="/login">Login</a>
+                </li>
+                <li class="nav-item" th:if="${user == null}">
+                    <a class="nav-link active" aria-current="page" href="/signup">Signup</a>
+                </li>
+
+                <!-- If user is logged in -->
+
+                <li class="nav-item" th:if="${user != null}">
+                    <a class="nav-link active" aria-current="page" href="#" th:text="${user.name}">User</a>
+                </li>
+
+
+                <!-- Show links for 'admin' -->
+                <li class="nav-item" th:if="${user != null and user.type == 'admin'}">
+                    <a class="nav-link active" aria-current="page" href="admin/words">Word</a>
+                </li>
+
+                <!-- Show dashboard link for 'user' -->
+                <li class="nav-item" th:if="${user != null and user.type == 'user'}">
+                    <a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
+                </li>
+
+                <li class="nav-item" th:if="${user != null}">
+                    <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

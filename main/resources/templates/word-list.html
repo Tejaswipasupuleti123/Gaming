@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word List</title>
+    <link rel="stylesheet" th:href="@{../style.css}" />
+    <link  th:href="@{../css/bootstrap.min.css}" rel="stylesheet" >
+</head>
+<body>
+<div th:replace="navbar"></div>
+<div class="container mt-5">
+    <h1 class="text-center">Word List</h1>
+    <a href="/admin/add-word" class="btn btn-primary mb-3">Add New Word</a>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Word</th>
+            <th>Hints</th>
+            <th>level</th>
+
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="word : ${words}">
+            <td th:text="${word.wid}"></td>
+            <td th:text="${word.wordName}"></td>
+            <td th:text="${word.hints}"></td>
+            <td th:text="${word.level}"></td>
+            <td><img th:src="@{'/' + ${word.image}}" width="100" /></td>
+            <td>
+                <a th:href="@{'/admin/update-word?id=' + ${word.wid}}" class="btn btn-success">Update</a>
+                <a th:href="@{'/admin/delete-word?id=' + ${word.wid}}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="footer"></div>
+<script th:href="@{../js/bootstrap.bundle.min.js}" ></script>
+</body>
+</html>

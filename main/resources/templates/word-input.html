@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Input</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" >
+</head>
+<body>
+
+<div th:replace="navbar"></div>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Word Input</h2>
+
+    <!-- Message Alert -->
+    <p th:if="${message}" th:text="${message}" class="alert alert-danger"></p>
+
+    <!-- Word Input Form -->
+    <div class="card">
+        <div class="card-body">
+            <form id="wordForm" action="/getWord" method="post" class="mt-4" onsubmit="return concatenateWord();">
+                <!-- Word Image -->
+                <div class="mb-3 text-center">
+                    <img th:src="@{'/' + ${GivenImage}}" class="word_image img-fluid" alt="Word Image" />
+                </div>
+
+                <!-- Hints -->
+                <h4 class="text-center" th:text="${GivenHints}"></h4>
+
+                <!-- 5 Input Boxes for User Guess -->
+                <div class="d-flex justify-content-center mb-3">
+                    <input type="text" id="letter1" maxlength="1" class="form-control mx-1 text-center" style="width: 50px;" required>
+                    <input type="text" id="letter2" maxlength="1" class="form-control mx-1 text-center" style="width: 50px;" required>
+                    <input type="text" id="letter3" maxlength="1" class="form-control mx-1 text-center" style="width: 50px;" required>
+                    <input type="text" id="letter4" maxlength="1" class="form-control mx-1 text-center" style="width: 50px;" required>
+                    <input type="text" id="letter5" maxlength="1" class="form-control mx-1 text-center" style="width: 50px;" required>
+                </div>
+
+                <!-- Hidden input to hold the concatenated word -->
+                <input type="hidden" id="word" name="word">
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Submit Your Guess</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:replace="footer"></div>
+<script th:href="@{js/bootstrap.bundle.min.js}"></script>
+
+<!-- JavaScript for concatenating the word -->
+<script>
+    function concatenateWord() {
+        // Get values from input boxes
+        var letter1 = document.getElementById("letter1").value;
+        var letter2 = document.getElementById("letter2").value;
+        var letter3 = document.getElementById("letter3").value;
+        var letter4 = document.getElementById("letter4").value;
+        var letter5 = document.getElementById("letter5").value;
+
+        // Concatenate to form the full word
+        var fullWord = letter1 + letter2 + letter3 + letter4 + letter5;
+
+        // Set the concatenated word in the hidden input field
+        document.getElementById("word").value = fullWord;
+
+        // Allow form submission
+        return true;
+    }
+</script>
+
+</body>
+</html>

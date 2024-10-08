@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup Page</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="container">
+        <a class="navbar-brand" href="#">Word Game</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+
+                <!-- If user is not logged in -->
+                <li class="nav-item" >
+                    <a class="nav-link active" aria-current="page" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/signup">Signup</a>
+                </li>
+
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2 class="text-center">Signup</h2>
+
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+    <form th:action="@{/signup-v}" method="post"  class="mt-4">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text"  name="name" class="form-control" id="name" placeholder="Enter your name" required/>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email"   name="email"  class="form-control" id="email" placeholder="Enter your email" required/>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password"   name="password"  class="form-control" id="password" placeholder="Enter your password" required/>
+        </div>
+        <div class="mb-3">
+            <label for="vpassword" class="form-label">Verify Password</label>
+            <input type="password"   name="vpassword"  class="form-control" id="vpassword" placeholder="Re-enter your password" required/>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+
+    </form>
+</div>
+
+<div th:replace="footer"></div> <!-- Footer fragment -->
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${word != null ? 'Update Word' : 'Add New Word'}"></title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{../style.css}" />
+    <link  th:href="@{../css/bootstrap.min.css}" rel="stylesheet" >
+</head>
+<body>
+<!-- Navbar -->
+
+<div th:replace="navbar"></div>
+
+
+<div class="container mt-5">
+    <h1 class="text-center" th:text="${word != null ? 'Update Word' : 'Add New Word'}"></h1>
+    <form th:action="@{${word != null ? '/admin/update-word-done' : '/admin/add-word'}}"
+          method="post" enctype="multipart/form-data" class="mt-4">
+        <input type="hidden" th:if="${word != null}" th:name="wid" th:value="${word.wid}" />
+        <div class="form-group mb-3">
+            <label for="wordName">Word Name</label>
+            <input type="text" class="form-control" id="wordName" name="wordName" placeholder="Enter
+word name" th:value="${word != null ? word.wordName : ''}" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="hints">Hints</label>
+            <textarea class="form-control" id="hints" name="hints" rows="3" placeholder="Enter hints"
+                      required th:text="${word != null ? word.hints : ''}"></textarea>
+        </div>
+        <div class="form-group mb-3">
+            <label for="level">Level</label>
+            <select class="form-control" id="level" name="level" required>
+                <option value="easy" th:attr="selected=${word != null and word.level == 'easy'}">Easy</option>
+                <option value="medium" th:attr="selected=${word != null and word.level == 'medium'}">Medium</option>
+                <option value="hard" th:attr="selected=${word != null and word.level == 'hard'}">Hard</option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label for="imageFile">Upload Image</label>
+            <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*">
+            <div th:if="${word != null}">
+                <img th:src="@{'/static/' + ${word.image}}" alt="Word Image" class="img-fluid mt-2"
+                     style="max-height: 150px;">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" th:text="${word != null ? 'Update Word' : 'Add
+Word'}"></button>
+    </form>
+</div>
+<!-- Bootstrap JS -->
+
+<div th:replace="footer"></div>
+<script th:href="@{../js/bootstrap.bundle.min.js}" ></script>
+</body>
+</html>

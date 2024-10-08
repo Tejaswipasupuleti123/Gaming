@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Game</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <link  th:href="@{css/bootstrap.min.css}" rel="stylesheet" >
+</head>
+<body>
+
+<div th:replace="navbar"></div>
+<div class="container mt-5 game-area">
+    <h1 class="text-center">Word Game</h1>
+    <h1 class="text-center">Hello <span th:text="${user.name}"></span> Your Score is <span th:text="${user.score}"></span></h1>
+    <p th:if="${message}" th:text="${message}" style="color: red;" class="alert alert-danger"></p>
+    <form action="/word" method="post" class="mt-4">
+        <div class="mb-3">
+            <label for="level" class="form-label">Select Level:</label>
+            <select name="selectedLevel" id="level" class="form-select" required>
+                <option value="" disabled selected>Select a level</option>
+                <option th:each="level : ${levels}" th:value="${level}" th:text="${level}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+</div>
+<!-- Bootstrap JS -->
+<div th:replace="footer"></div>
+<script th:href="@{js/bootstrap.bundle.min.js}" ></script>>
+</body>
+</html>
